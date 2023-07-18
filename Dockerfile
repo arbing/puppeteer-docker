@@ -11,6 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_VERSION=20.8.2
 
 # Install latest chromium dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer installs, work.
@@ -34,8 +35,10 @@ RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packagi
 # install dumb-init
 RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_$ARCH.deb \
     && dpkg -i dumb-init_1.2.2_$ARCH.deb
+
+# install puppeteer
+RUN yarn global add \
+        puppeteer@$PUPPETEER_VERSION \
+    && yarn cache clean
+
 ENTRYPOINT ["dumb-init", "--"]
-
-
-
-
