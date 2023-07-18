@@ -33,5 +33,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: alaminopu/puppeteer-docker:${{ env.RELEASE_VERSION }}
+          tags: arbing/puppeteer-docker:${{ env.RELEASE_VERSION }}
           platforms: linux/amd64,linux/arm64
