@@ -36,9 +36,8 @@ RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packagi
 RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_$ARCH.deb \
     && dpkg -i dumb-init_1.2.2_$ARCH.deb
 
-# install puppeteer
-RUN yarn global add \
-        puppeteer@$PUPPETEER_VERSION \
-    && yarn cache clean
+# install pnpm
+RUN npm install -g pnpm \
+    && npm cache clean --force
 
 ENTRYPOINT ["dumb-init", "--"]
